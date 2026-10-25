@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows10.0.19041.0</TargetFramework>
+    <SupportedOSPlatformVersion>10.0.19041.0</SupportedOSPlatformVersion>
+    <UseWindowsForms>true</UseWindowsForms>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <RootNamespace>MyriadMelodies</RootNamespace>
+    <AssemblyName>MyriadMelodies</AssemblyName>
+    <ApplicationIcon>MM128x128.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Legacy .NET Framework startup config is unused by this .NET application. -->
+    <None Remove="App.config" />
+    <PackageReference Include="Vortice.Direct3D11" Version="3.8.3" />
+    <EmbeddedResource Include="../LICENSE" LogicalName="MyriadMelodies.LICENSE" />
+    <EmbeddedResource Include="../THIRD-PARTY-NOTICES.txt" LogicalName="MyriadMelodies.THIRD-PARTY-NOTICES" />
+  </ItemGroup>
+
+</Project>

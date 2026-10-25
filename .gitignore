@@ -1,0 +1,17 @@
+.vs/
+**/bin/
+**/obj/
+*.user
+artifacts/
+.idea/
+.vscode/
+__pycache__/
+*.pyc
+*.mp4
+*.zip
+**/MyriadMelodies.portable
+**/overlay-settings.json
+**/custom-color-themes.json
+**/last-color-theme.txt
+**/*.tmp
+Новая папка/
