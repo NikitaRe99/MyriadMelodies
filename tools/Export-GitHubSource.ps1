@@ -12,7 +12,7 @@ $taskRoots=@('MyriadMelodies','tests','tools','docs','.github','MyriadMelodies.s
 $taskExcludedDirectories=@('bin','obj','artifacts','packages','.git','.vs','.agents','.codex','.idea','.vscode','__pycache__')
 $taskExcludedFiles=@('MyriadMelodies.portable','overlay-settings.json','custom-color-themes.json','last-color-theme.txt','packages.config','App.config')
 $taskInternalFiles=@('docs/CODE-REVIEW.md','docs/GITHUB.md','tools/promote-debug-themes.py','tools/extract-ui-strings.py','tools/localize-ui-literals.py')
-$taskAllowedExtensions=@('.cs','.csproj','.sln','.resx','.ico','.pubxml','.md','.txt','.json','.settings','.ps1','.py','.yml','.yaml','.png')
+$taskAllowedExtensions=@('.cs','.csproj','.sln','.resx','.ico','.pubxml','.md','.txt','.json','.settings','.ps1','.py','.yml','.yaml','.png','.html','.css','.xml')
 $taskApprovedImages=@('compact-ru.png','compact-en.png','settings-zones-ru.png','settings-zones-en.png','result-ru.png','result-en.png')
 foreach($taskEntry in $taskRoots){
     $taskSource=Join-Path $taskRoot $taskEntry
@@ -22,7 +22,7 @@ foreach($taskEntry in $taskRoots){
         if($taskRelative.Replace('\','/') -in $taskInternalFiles){continue}
         if(@($taskSegments | Where-Object {$_ -in $taskExcludedDirectories}).Count -gt 0){continue}
         if($taskFile.Name -in $taskExcludedFiles -or $taskFile.Extension -in @('.user','.suo','.tmp','.mp4','.pdb','.sqlite','.zip')){continue}
-        if($taskFile.Extension -notin $taskAllowedExtensions -and $taskFile.Name -notin @('LICENSE','.gitignore')){throw "Unexpected source file: $taskRelative"}
+        if($taskFile.Extension -notin $taskAllowedExtensions -and $taskFile.Name -notin @('LICENSE','.gitignore','.nojekyll')){throw "Unexpected source file: $taskRelative"}
         if($taskFile.Extension -eq '.png' -and ($taskRelative -notlike 'docs*images*' -or $taskFile.Name -notin $taskApprovedImages)){throw "Image is not approved for publishing: $taskRelative"}
         $taskTarget=Join-Path $taskOutput $taskRelative
         New-Item -ItemType Directory -Path (Split-Path $taskTarget -Parent) -Force | Out-Null

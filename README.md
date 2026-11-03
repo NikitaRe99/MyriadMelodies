@@ -2,6 +2,8 @@
 
 [Русский](README.ru.md) · **English**
 
+[Project website](https://nikitare99.github.io/MyriadMelodies/)
+
 ![Example in-game result](docs/images/result-en.png)
 
 A compact Windows assistant for Repertoire of Myriad Melodies, the rhythm game in Genshin Impact. It captures the game window or a display, detects note colors in six regions and presses your assigned keys. It does not read the game's memory.

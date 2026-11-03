@@ -2,6 +2,8 @@
 
 **Русский** · [English](README.md)
 
+[Сайт проекта](https://nikitare99.github.io/MyriadMelodies/ru.html)
+
 ![Пример результата в игре](docs/images/result-ru.png)
 
 Компактный помощник для режима «Мириад мелодий» (Repertoire of Myriad Melodies) в Genshin Impact. Приложение захватывает окно игры или экран, распознаёт цвета нот в шести зонах и нажимает назначенные клавиши. Чтение памяти игры не используется.
