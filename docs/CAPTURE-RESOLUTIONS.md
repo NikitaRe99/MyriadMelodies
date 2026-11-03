@@ -1,46 +1,47 @@
-# Общее правило размещения зон
+# Capture region placement
 
-Обе раскладки описаны формулами от центра игрового поля, без массивов
-координат отдельных клавиш и без таблиц профилей по пропорциям экрана.
-Реализация: `MyriadMelodies/CaptureLayout.cs`.
+[Русский](CAPTURE-RESOLUTIONS.ru.md) · **English**
 
-## Исходные измерения
+Both layouts use formulas relative to the game field center, without per-key
+coordinate arrays or separate aspect-ratio profiles.
+Implementation: `MyriadMelodies/CaptureLayout.cs`.
 
-Использованы PNG пользователя «Снимок экрана (109)» — «Снимок экрана (118)»:
-3440×1440, 2560×1080, 1920×1200, 1280×960, 1280×800, обе раскладки.
-Измерялась светлая круглая сердцевина; подписи клавиш исключены.
-Исходные файлы не изменялись. Наблюдения хранятся в
+## Measurement basis
+
+The model was checked against both layouts at 3440×1440, 2560×1080,
+1920×1200, 1280×960 and 1280×800. Measurements locate the bright circular
+centers and exclude key labels. Coordinates for reproducible checks are in
 `tests/CaptureLayout.Checks/observations.json`.
 
-## Общие величины
+## Shared values
 
-`(L,T,W,H)` — границы игрового поля в физических пикселях рабочего стола.
-`i=0..5` соответствует клавишам A/S/D/J/K/L.
+`(L,T,W,H)` are the game field bounds in physical pixels.
+`i=0..5` identifies the regions, with default keys A/S/D/J/K/L.
 
-```
+```text
 u = min(W / 1920, H / 1080)
 s = max(1, round(33 * u))
 x[i] = round(cx[i] - s/2)
 y[i] = round(cy[i] - s/2)
 ```
 
-`cx/cy` — центры; `x/y` — левый верхний угол квадратной зоны.
-Размер интерфейса `u` и геометрия дорожек вычисляются отдельно.
+`cx/cy` are centers; `x/y` are the top-left corners of square capture regions.
+UI scale and lane geometry are calculated separately.
 
-## Вертикальная раскладка
+## Vertical layout
 
-```
+```text
 step = 0.3 * H - 107.6 * u
 cx[i] = L + W/2 + (i - 2.5) * step
 cy[i] = T + 0.8975 * H - 48.3 * u - 0.5
 ```
 
-Правило подобрано по всем пяти разрешениям. Максимальное отклонение
-после округления зон — 0,877 px.
+The rule was fitted across all five resolutions. Maximum center error after
+rounding the regions is 0.877 px on these measurements.
 
-## Веерная раскладка
+## Spread layout
 
-```
+```text
 z = clamp((H/u - 1080) / 360, 0, 1)
 j = abs(i - 2.5) - 0.5
 
@@ -52,53 +53,52 @@ cx[i] = L + W/2 + sign(i - 2.5) * d
 cy[i] = T + 0.836686*H - u*(33.621 + 31.05*j + 19.567*j*j)
 ```
 
-`j=0` задаёт внутреннюю пару D/J, `j=1` — S/K, `j=2` — A/L.
-Расстояние `d` зеркально откладывается от середины поля. Высота описана
-квадратичной кривой по номеру пары. Поправка `z` непрерывно меняется с
-пропорциями поля: 0 для 16:9 и шире, 1/3 для 16:10, 1 для 4:3.
+`j=0` is the inner D/J pair, `j=1` is S/K, and `j=2` is A/L.
+Distance `d` is mirrored around the center. A quadratic curve describes the
+height. Shape parameter `z` varies continuously: 0 for 16:9 and wider,
+1/3 for 16:10, and 1 for 4:3.
 
-Это параметрическая эмпирическая кривая. Константы описывают общую форму,
-а не отдельные позиции каждой клавиши. Последняя поправка по X ненулевая
-только для средней пары и позволяет учесть наблюдаемую нелинейность
-изменения формы при смене пропорций. Без неё и с повторной подгонкой
-линейной модели максимальная ошибка после округления составляет около
-1,8 px. Полная формула даёт максимум 0,926 px на предоставленных кадрах.
+This is an empirical parametric curve, not the game's source algorithm.
+Constants describe the shared shape rather than individual key coordinates.
+The final X correction only affects the middle pair and accounts for the
+observed nonlinear change across aspect ratios. Omitting it and refitting
+the linear model gives about 1.8 px maximum error after rounding. The full
+formula gives 0.926 px maximum error on the measured frames.
 
-Коэффициенты веера получены методом наименьших квадратов по кадрам 110,
-114 и 115. Кадры 111 и 118 исключены из подгонки и проверяют перенос
-на другой размер экрана тех же пропорций. Скрипт воспроизведения подбора:
-`tools/fit_fan_layout.py` (нужен NumPy).
+Least-squares fitting uses 3440×1440, 1920×1200 and 1280×960 measurements.
+The 2560×1080 and 1280×800 measurements are held out to check transfer to
+another size at the same aspect ratio. Reproduce the fit with
+`tools/fit_fan_layout.py` (requires NumPy).
 
-Простая равномерная окружность не выбрана: точки имеют неодинаковые
-угловые интервалы, а радиальная погрешность самой окружности уже
-достигает примерно 1 px до округления. Формула выше сохраняет точность
-и не требует хранить таблицы координат.
+A uniformly spaced circle does not match: angular spacing varies and radial
+error reaches approximately 1 px before rounding. The formula retains
+accuracy without storing coordinate tables.
 
-## Проверки
+## Validation
 
-```
+```text
 dotnet run --project tests/CaptureLayout.Checks/CaptureLayout.Checks.csproj -- artifacts/capture-layout/validation.json
-python tools/measure_capture_layout.py "<папка с исходными скриншотами>"
-python tools/plot_capture_layout.py "<папка с исходными скриншотами>"
+python tools/measure_capture_layout.py "<source screenshots directory>"
+python tools/plot_capture_layout.py "<source screenshots directory>"
 ```
 
-Проверка исполняет C#-реализацию приложения и сравнивает центры областей
-со всеми 60 измеренными точками. Дополнительно проверены отрицательный
-X монитора, положительный сдвиг Y, границы областей, промежуточные
-пропорции и экраны высотой вплоть до 8640 px.
+The C# checks compare the implementation against all 60 measured points.
+They also cover negative monitor X, positive Y offsets, region bounds,
+intermediate aspect ratios and screen heights up to 8640 px. The Python
+tools optionally remeasure and plot the original screenshots, which are
+not bundled with the source.
 
-Иллюстрация рассчитанных зон: `artifacts/capture-layout/comparison.png`.
-Точные ошибки по каждому кадру: `artifacts/capture-layout/validation.json`.
+Generated outputs: `artifacts/capture-layout/comparison.png` and
+`artifacts/capture-layout/validation.json`.
 
-## Границы применения
+## Limits
 
-Это правило по наблюдениям, а не восстановленный исходный алгоритм игры.
-Между измеренными пропорциями точность ещё не проверена игровыми кадрами;
-геометрические проверки не измеряют точность распознавания и нажатий.
-Пропорции уже 4:3 отклоняются. Более широкие экраны, чем предоставленные
-3440×1440, используют тот же центральный рисунок, но также требуют проверки.
+Intermediate aspect ratios have geometry checks but have not been verified
+against game frames. These checks do not measure recognition or input
+accuracy. Aspect ratios narrower than 4:3 are rejected. Screens wider than
+3440×1440 use the same central pattern and need additional game validation.
 
-В приложении игровое поле пока равно полному выбранному монитору.
-Для окна или чёрных полос нужны фактические границы изображения игры;
-автоматического определения этих границ пока нет. Сохраняются
-PerMonitorV2 и учёт смещения выбранного монитора.
+Display capture uses monitor bounds; window capture uses the client area
+without the title bar or borders. Coordinates must match the game image in
+physical pixels. Letterboxing inside the image is not detected automatically.
+The application uses PerMonitorV2 and accounts for monitor offsets.

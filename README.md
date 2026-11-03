@@ -1,55 +1,55 @@
-# MyriadMelodies
+# MyriadMelodies — Genshin Impact rhythm game assistant
 
-**Русский** · [English](README.en.md)
+[Русский](README.ru.md) · **English**
 
-![Пример результата в игре](docs/images/result-ru.png)
+![Example in-game result](docs/images/result-en.png)
 
-Компактный помощник для ритм-игры в Genshin Impact. Приложение захватывает окно игры или экран, распознаёт цвета нот в шести зонах и нажимает назначенные клавиши. Чтение памяти игры не используется.
+A compact Windows assistant for Repertoire of Myriad Melodies, the rhythm game in Genshin Impact. It captures the game window or a display, detects note colors in six regions and presses your assigned keys. It does not read the game's memory.
 
-![Компактное окно](docs/images/compact-ru.png)
+![Compact window](docs/images/compact-en.png)
 
-## Скачать
+## Download
 
-В [Releases](https://github.com/NikitaRe99/MyriadMelodies/releases) есть два варианта:
+Two options are available in [Releases](https://github.com/NikitaRe99/MyriadMelodies/releases):
 
-- **[Полная версия](https://github.com/NikitaRe99/MyriadMelodies/releases/latest/download/MyriadMelodies-standalone-win-x64.exe)** — работает без установки .NET.
-- **[Компактная версия](https://github.com/NikitaRe99/MyriadMelodies/releases/latest/download/MyriadMelodies-runtime-required-win-x64.exe)** — требуется [.NET Desktop Runtime 10 x64](https://dotnet.microsoft.com/en-us/download/dotnet/10.0).
+- **[Full version](https://github.com/NikitaRe99/MyriadMelodies/releases/latest/download/MyriadMelodies-standalone-win-x64.exe)** — works without installing .NET.
+- **[Compact version](https://github.com/NikitaRe99/MyriadMelodies/releases/latest/download/MyriadMelodies-runtime-required-win-x64.exe)** — requires [.NET Desktop Runtime 10 x64](https://dotnet.microsoft.com/en-us/download/dotnet/10.0).
 
-Обе версии — для Windows x64: Windows 10 версии 2004 или новее либо Windows 11.
+Both versions run on Windows x64: Windows 10 version 2004 or later, or Windows 11.
 
-## Возможности
+## Features
 
-- Два режима: вертикальный и режим распространения.
-- Расчёт зон для 16:9, 21:9, 16:10 и 4:3.
-- 25 встроенных тем, добавление и редактирование своих, изменение порядка.
-- Назначение клавиш для каждой зоны и сброс к A/S/D/J/K/L.
-- Предпросмотр зон, среднего цвета и состояния нажатия.
-- Русский и английский интерфейс, прозрачность и окно поверх игры.
-- Хранение настроек в LocalAppData или рядом с EXE.
+- Vertical and spread modes.
+- Region layouts for 16:9, 21:9, 16:10 and 4:3.
+- 25 built-in themes, custom theme creation/editing and reordering.
+- Per-region key bindings with a reset to A/S/D/J/K/L.
+- Live region, average color and key-state previews.
+- English/Russian UI, adjustable opacity and an always-on-top window.
+- Settings in LocalAppData or beside the EXE.
 
-## Как пользоваться
+## Getting started
 
-1. Запустите игру в оконном режиме или без рамки.
-2. Выберите окно Genshin или монитор, затем режим и тему, совпадающие с игрой.
-3. Нажмите «Старт» и вернитесь в игру. Нажатия приостанавливаются, когда игра неактивна; «Стоп» завершает захват.
-4. Чтобы переназначить клавиши, откройте «Зоны» и нажмите нужную карточку.
-5. Для своей темы нажмите «+» и следуйте инструкции. Карандаш в списке открывает редактирование; темы можно перетаскивать.
+1. Run the game in windowed or borderless mode.
+2. Select the Genshin window or a display, then choose the mode and theme that match the game.
+3. Click **Start** and return to the game. Key presses pause while the game is inactive; **Stop** ends capture.
+4. Open **Zones** and click a region card to change its key binding.
+5. Click **+** to add a theme and follow the instructions. The pencil in the list opens editing; drag themes to reorder them.
 
-Первый запуск компактный — настройки и зоны скрыты. Настройки открываются кнопкой «…». Язык первого запуска выбирается по Windows: русский для русского интерфейса системы, английский — для остальных языков.
+The first launch is compact, with settings and zones hidden. Click **…** to open settings. The initial UI language follows Windows: Russian for a Russian system UI and English for other languages.
 
-## Настройки и перенос
+## Settings and portability
 
-В поле «Хранение» можно выбрать **LocalAppData** (`%LOCALAPPDATA%\MyriadMelodies`) или **«Рядом с EXE»**. При переключении копируются параметры, клавиши, темы и их порядок. Предыдущие копии сохраняются. Для переноса переносимой версии скопируйте всю папку программы с JSON-файлами и маркером `MyriadMelodies.portable`.
+**Storage** lets you choose **LocalAppData** (`%LOCALAPPDATA%\MyriadMelodies`) or **Beside EXE**. Switching copies your preferences, key bindings, themes and theme order. Previous copies are kept. To move a portable setup, copy the whole app folder, including its JSON files and the `MyriadMelodies.portable` marker.
 
-## Скриншоты
+## Screenshots
 
-Настройки и предпросмотр зон:
+Settings and zone previews:
 
-![Настройки и предпросмотр зон](docs/images/settings-zones-ru.png)
+![Settings and zone previews](docs/images/settings-zones-en.png)
 
-## Исходники
+## Building from source
 
-Для сборки нужен .NET 10 SDK под Windows:
+Use the .NET 10 SDK on Windows:
 
 ```powershell
 dotnet build MyriadMelodies.sln -c Release
@@ -57,10 +57,10 @@ dotnet build MyriadMelodies.sln -c Release
 ./tools/Publish.ps1
 ```
 
-[Сборка и распространение](docs/DISTRIBUTION.md) · [Геометрия зон](docs/CAPTURE-RESOLUTIONS.md) · [Лицензия MIT](LICENSE)
+[Build and distribution](docs/DISTRIBUTION.md) · [Region geometry](docs/CAPTURE-RESOLUTIONS.md) · [MIT license](LICENSE)
 
-MyriadMelodies — независимый инструмент. Genshin Impact и игровые материалы принадлежат их правообладателям.
+MyriadMelodies is an independent tool. Genshin Impact and game assets belong to their respective owners.
 
-## Благодарность
+## Thanks
 
-Если хотите поблагодарить в игре — **UID 731852725**.
+If you'd like to say thanks in-game — **UID 731852725**.

@@ -8,7 +8,7 @@ if(-not $taskOutput.StartsWith($taskRoot+[System.IO.Path]::DirectorySeparatorCha
 }
 if(Test-Path -LiteralPath $taskOutput){throw 'Use a new, empty export directory.'}
 New-Item -ItemType Directory -Path $taskOutput | Out-Null
-$taskRoots=@('MyriadMelodies','tests','tools','docs','.github','MyriadMelodies.sln','README.md','README.en.md','LICENSE','THIRD-PARTY-NOTICES.txt','.gitignore')
+$taskRoots=@('MyriadMelodies','tests','tools','docs','.github','MyriadMelodies.sln','README.md','README.ru.md','LICENSE','THIRD-PARTY-NOTICES.txt','.gitignore')
 $taskExcludedDirectories=@('bin','obj','artifacts','packages','.git','.vs','.agents','.codex','.idea','.vscode','__pycache__')
 $taskExcludedFiles=@('MyriadMelodies.portable','overlay-settings.json','custom-color-themes.json','last-color-theme.txt','packages.config','App.config')
 $taskInternalFiles=@('docs/CODE-REVIEW.md','docs/GITHUB.md','tools/promote-debug-themes.py','tools/extract-ui-strings.py','tools/localize-ui-literals.py')

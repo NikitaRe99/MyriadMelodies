@@ -21,7 +21,7 @@
 оконный режим или режим без рамки. Нажмите «Старт» и вернитесь в игру:
 когда игра неактивна, нажатия приостанавливаются.
 
-[Русское описание и скриншоты](https://github.com/NikitaRe99/MyriadMelodies/blob/main/README.md)
+[Русское описание и скриншоты](https://github.com/NikitaRe99/MyriadMelodies/blob/main/README.ru.md)
 
 Если хотите поблагодарить в игре — **UID 731852725**.
 
@@ -50,6 +50,6 @@ Other application libraries are bundled in both versions. Windows 10 version
 for the overlay. Click **Start** and return to the game: key presses pause
 while the game is inactive.
 
-[English description and screenshots](https://github.com/NikitaRe99/MyriadMelodies/blob/main/README.en.md)
+[English description and screenshots](https://github.com/NikitaRe99/MyriadMelodies/blob/main/README.md)
 
 If you'd like to say thanks in-game — **UID 731852725**.
