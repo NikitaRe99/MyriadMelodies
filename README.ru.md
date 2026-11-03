@@ -15,7 +15,7 @@
 - **[Полная версия](https://github.com/NikitaRe99/MyriadMelodies/releases/latest/download/MyriadMelodies-standalone-win-x64.exe)** — работает без установки .NET.
 - **[Компактная версия](https://github.com/NikitaRe99/MyriadMelodies/releases/latest/download/MyriadMelodies-runtime-required-win-x64.exe)** — требуется [.NET Desktop Runtime 10 x64](https://dotnet.microsoft.com/en-us/download/dotnet/10.0).
 
-Обе версии — для Windows x64: Windows 10 версии 2004 или новее либо Windows 11.
+Обе версии работают на Windows 10 (начиная с версии 2004) и Windows 11. Поддерживается только x64.
 
 ## Возможности
 
